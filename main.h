@@ -50,15 +50,12 @@ typedef struct builtin
 
 int _env(char **env, int args);
 void h_exit(int);
-int _setenv(char **env, int args);
-int _unsetenv(char **env, int args);
 int _cd(char **env, int args);
 
+size_t	_strlen(const char *s);
+
 void *_realloc(void *ptr, size_t size);
-char **_strtok(char *str, char *delim);
 char **strtow(char *str, char delim);
-int _strlen(char *s);
-char *_strdup(char *str);
 
 int error(char *msg, char *arg, int status);
 

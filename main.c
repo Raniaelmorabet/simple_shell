@@ -1,10 +1,18 @@
 #include "main.h"
+#include "getline.h"
+
+void handler(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
 
 int main (int av, char **ac, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL;
-	size_t len = 0, read;
+
+	signal(SIGINT, handler);
 
 	while (1337)
 	{
@@ -12,9 +20,9 @@ int main (int av, char **ac, char **env)
 		write(STDOUT_FILENO, "$ ", 2);
 
 		// read input using getline
-		read = getline(&line, &len, stdin);
-		if (read == -1)
-			break;
+		line = _getline(STDIN_FILENO);
+		if (!line)
+			break; // EOF
 
 		// check if input is empty
 		if (line[0] == '\n')
@@ -51,6 +59,7 @@ int main (int av, char **ac, char **env)
 		for (int i = 0; tokens[i]; i++)
 			free(tokens[i]);
 		free(tokens);
+		free(line);
 
 	}
 
