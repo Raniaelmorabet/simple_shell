@@ -1,10 +1,29 @@
 #include "main.h"
 
-int main (int av, char **ac, char **env)
+/**
+ * main - entry point
+ * @ac: argument count
+ * @av: argument vector
+ * @env: environment variables
+ * Return: SUCCESS
+ */
+int main (int ac, char **av, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL;
 	size_t len = 0, read;
+	char **PATHS = NULL;
+
+	// search for PATH in env
+	for (int i = 0; env[i]; i++)
+	{
+		if (strncmp(env[i], "PATH=", 5) == 0)
+		{
+			// parse PATH into tokens
+			PATHS = strtow(env[i] + 5, ':');
+			break;
+		}
+	}
 
 	while (1337)
 	{
@@ -29,14 +48,33 @@ int main (int av, char **ac, char **env)
 			continue;
 
 		// check if first token is a built-in
+		if (strcmp(tokens[0], "exit") == 0)
+			h_exit(0);
 
 		// if not, check if it's a path to an executable
-		if (access(tokens[0], F_OK) != -1)
+		int is_cmd = 0;
+		char cmd[1024];
+
+		for (int i = 0; PATHS[i]; i++)
+		{
+			strcpy(cmd, PATHS[i]);
+			strcat(cmd, "/");
+			strcat(cmd, tokens[0]);
+			if (access(cmd, F_OK) != -1)
+			{
+				is_cmd = 1;
+				break;
+			}
+			memset(cmd, 0, 1024);
+		}
+
+//		if (access(tokens[0], F_OK) != -1)
+		if (is_cmd)
 		{
 			// if it is, execute it
 			int pid = fork();
 			if (pid == 0)
-				execve(tokens[0], tokens, env);
+				execve(cmd, tokens, env);
 			else
 				wait(NULL);
 
