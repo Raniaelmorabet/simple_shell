@@ -9,38 +9,34 @@
 #include <unistd.h>
 #include <signal.h>
 
-typedef struct s_cmd_elem
+typedef struct s_info info_t;
+typedef struct s_cmd cmd_t;
+typedef struct s_cmd_elem cmd_elem_t;
+typedef struct s_env env_t;
+typedef struct s_env_elem env_elem_t;
+
+typedef struct s_info
+{
+	cmd_t *cmd;
+	env_t *env;
+	int status;
+} info_t;
+
+typedef struct s_cmd
 {
 	char *path;
 	char **args;
 
-	struct s_cmd_elem *next;
-	struct s_cmd_elem *prev;
-} cmd_elem_t;
+	struct s_cmd *next;
+	struct s_cmd *prev;
+} cmd_t;
 
-typedef struct s_cmd
+typedef struct s_cmd_list
 {
 	cmd_elem_t *head;
 	cmd_elem_t *tail;
 	int	size;
-} cmd_t;
-
-typedef struct s_env_elem
-{
-	char *name;
-	char *value;
-
-	struct s_env *next;
-	struct s_env *prev;
-} env_elem_t;
-
-typedef struct s_env
-{
-	env_elem_t *head;
-	env_elem_t *tail;
-	int	size;
-} env_t;
-
+} cmd_list_t;
 
 typedef struct builtin
 {
@@ -48,10 +44,10 @@ typedef struct builtin
 	int (*func)(char **, int);
 } builtin_t;
 
-int _env(char **env, int args);
+int _env(cmd_t *cmd, env_t *env);
 void h_exit(int);
-int _setenv(char **env, int args);
-int _unsetenv(char **env, int args);
+int _setenv(cmd_t *cmd, env_t *env);
+int _unsetenv(cmd_t *cmd, env_t *env);
 int _cd(char **env, int args);
 
 void *_realloc(void *ptr, size_t size);

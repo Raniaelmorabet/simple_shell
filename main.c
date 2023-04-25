@@ -1,4 +1,5 @@
 #include "main.h"
+#include "env.h"
 
 /**
  * main - entry point
@@ -9,6 +10,11 @@
  */
 int main (int ac, char **av, char **env)
 {
+
+	env_t *env_vars = env_init(env);
+	env_print(env_vars);
+	exit(0);
+
 	char **tokens = NULL;
 	char *line = NULL;
 	size_t len = 0, read;
