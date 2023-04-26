@@ -81,7 +81,7 @@ typedef struct builtin
 } builtin_t;
 
 int _env(char **env, int args);
-void h_exit(int);
+int h_exit(char *bin, char *status, int line);
 int _setenv(char **env, int args);
 int _unsetenv(char **env, int args);
 /*int _cd(char **env, int args);*/

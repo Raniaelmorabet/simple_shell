@@ -15,6 +15,7 @@ int error(char *msg, char *arg, int status)
 	return (status);
 }
 
+
 /**
  * cmd_error - prints an error message for a command
  * @bin: name of program
