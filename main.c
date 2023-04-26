@@ -49,7 +49,10 @@ char *readline(char *prompt)
 	/* read input using getline */
 	read = getline(&line, &len, stdin);
 	if (read == -1)
+	{
+		free(line);
 		return (NULL);
+	}
 
 	/* check if input is empty */
 	if (line[0] == '\n')
@@ -83,12 +86,20 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		if (!line)
 			break;
 		if (line[0] == '\n')
+		{
+			free(line);
+			line = NULL;
 			continue;
+		}
 
 		/* parse input into tokens */
 		tokens = strtow(line, ' ');
 		if (!tokens)
+		{
+			free(line);
+			line = NULL;
 			continue;
+		}
 
 		/* if not, check if it's a path to an executable */
 		if (access(tokens[0], F_OK) != -1)
@@ -107,6 +118,9 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		for (i = 0; tokens[i]; i++)
 			free(tokens[i]);
 		free(tokens);
+		free(line);
+		line = NULL;
 	}
+	free(line);
 	return (0);
 }
