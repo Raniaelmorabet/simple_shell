@@ -45,4 +45,3 @@ int h_exit(char *bin, char *status, int line)
 		free(status);
 	exit(status_int);
 }
-
