@@ -75,7 +75,7 @@ char *readline(char *prompt)
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
-	char *line = NUL;
+	char *line = NULL;
 	int line_count = 0;
 
 	while (1337)
