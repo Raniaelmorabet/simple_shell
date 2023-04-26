@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * _env - prints the environment
+ * @env: environment variables
+ * @args: number of arguments
+ * Return: EXIT_SUCCESS or EXIT_FAILURE
+ */
 int _env(char **env, int args)
 {
 	int i = 0;

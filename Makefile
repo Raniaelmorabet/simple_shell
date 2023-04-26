@@ -5,7 +5,7 @@ headers = $(wildcard *.h)
 
 bin = hsh
 
-CFLAGS = -I . -g # -Wall -Wextra -Werror -pedantic -std=c99 -g
+CFLAGS = -I . -Wall -Wextra -Werror -pedantic -std=c99 -g
 
 .PHONY: all clean fclean re
 

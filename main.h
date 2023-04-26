@@ -11,6 +11,13 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+/**
+ * struct s_cmd_elem - linked list element for commands
+ * @path: path to command
+ * @args: arguments to command
+ * @next: pointer to next element
+ * @prev: pointer to previous element
+ */
 typedef struct s_cmd_elem
 {
 	char *path;
@@ -20,6 +27,12 @@ typedef struct s_cmd_elem
 	struct s_cmd_elem *prev;
 } cmd_elem_t;
 
+/**
+ * struct s_cmd - linked list for commands
+ * @head: pointer to head of list
+ * @tail: pointer to tail of list
+ * @size: number of elements in list
+ */
 typedef struct s_cmd
 {
 	cmd_elem_t *head;
@@ -27,6 +40,13 @@ typedef struct s_cmd
 	int	size;
 } cmd_t;
 
+/**
+ * struct s_env_elem - linked list element for environment variables
+ * @name: name of environment variable
+ * @value: value of environment variable
+ * @next: pointer to next element
+ * @prev: pointer to previous element
+ */
 typedef struct s_env_elem
 {
 	char *name;
@@ -36,6 +56,12 @@ typedef struct s_env_elem
 	struct s_env *prev;
 } env_elem_t;
 
+/**
+ * struct s_env - linked list for environment variables
+ * @head: pointer to head of list
+ * @tail: pointer to tail of list
+ * @size: number of elements in list
+ */
 typedef struct s_env
 {
 	env_elem_t *head;
@@ -43,7 +69,11 @@ typedef struct s_env
 	int	size;
 } env_t;
 
-
+/**
+ * struct builtin - builtin command
+ * @name: name of builtin
+ * @func: function to execute builtin
+ */
 typedef struct builtin
 {
 	char *name;
