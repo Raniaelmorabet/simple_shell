@@ -91,7 +91,6 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			line = NULL;
 			continue;
 		}
-
 		/* parse input into tokens */
 		tokens = strtow(line, ' ');
 		if (!tokens)
@@ -100,7 +99,6 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			line = NULL;
 			continue;
 		}
-
 		/* if not, check if it's a path to an executable */
 		if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
@@ -113,14 +111,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			error(tokens[0], ": not found\n", 127);
 			free(line_number);
 		}
-
-		/* free all resources */
-		for (i = 0; tokens[i]; i++)
-			free(tokens[i]);
-		free(tokens);
-		free(line);
-		line = NULL;
+		free_resources(&line, &tokens);
 	}
-	free(line);
 	return (0);
 }

@@ -106,5 +106,6 @@ int	_atoi(const char *str);
 char *_itoa(ssize_t value, char *base);
 
 ssize_t _abs(ssize_t n);
+void free_resources(char **line, char ***tokens);
 
 #endif /* MAIN_H */

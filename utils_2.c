@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdlib.h>
 
 /**
  * _strchr - locates a character in a string
@@ -48,4 +49,22 @@ char *_memset(char *s, char b, unsigned int n)
 ssize_t _abs(ssize_t n)
 {
 	return (n < 0 ? -n : n);
+}
+
+/**
+ * free_resources - frees all resources
+ * @line: line to free
+ * @tokens: tokens to free
+ * Return: void
+ */
+void free_resources(char **line, char ***tokens)
+{
+	int i;
+
+	for (i = 0; (*tokens)[i]; i++)
+		free((*tokens)[i]);
+	free(*tokens);
+	free(*line);
+	*line = NULL;
+	*tokens = NULL;
 }
