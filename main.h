@@ -41,7 +41,7 @@ typedef struct s_cmd_list
 typedef struct builtin
 {
 	char *name;
-	int (*func)(char **, int);
+	int (*func)(cmd_t *, env_t *);
 } builtin_t;
 
 int _env(cmd_t *cmd, env_t *env);

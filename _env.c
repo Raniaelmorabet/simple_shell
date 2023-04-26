@@ -28,6 +28,10 @@ int _setenv(cmd_t *cmd, env_t *env)
 	if (name == NULL || value == NULL)
 	{
 		// todo: free name or value
+		if (name)
+			free(name);
+		if (value)
+			free(value);
 		return (1);
 	}
 
