@@ -1,4 +1,5 @@
 # <ins>simple shell</ins></span>
+
 ![img.png](img.png)
 ## <ins>*Resources*
 ### <ins>*_Read or watch:_*
@@ -40,7 +41,7 @@
 ![img_3.png](img_3.png)
 ## Creating processes
 * **_The system call fork (man 2 fork) creates a new child process, almost identical to the parent (the process that calls fork). Once fork successfully returns, two processes continue to run the same program, but with different stacks, datas and heaps._**
-* ![img_4.png](img_4.png)
+![img_4.png](img_4.png)
 
 ### to continue this learning process make sure to visit : 
 * [Everything you need to know to start coding your own shell](https://intranet.alxswe.com/concepts/64)
