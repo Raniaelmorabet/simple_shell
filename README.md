@@ -13,4 +13,7 @@
 ##### *Each process has a parent: the process that created it. It is possible to get the PID of a parent process by using the getppid system call (man 2 getppid), from within the child process*
 ### <ins>Exercises
 #### <ins>0.getppid
-
+**_Write a program that prints the PID of the parent process. Run your program several times within the same shell. It should be the same. Does echo $$ print the same value? Why?_**
+#### <ins>1./proc/sys/kernel/pid_max
+**_Write a shell script that prints the maximum value a process ID can be._**
+### <ins>Arguments
