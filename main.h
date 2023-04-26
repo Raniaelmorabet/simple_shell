@@ -80,7 +80,7 @@ typedef struct builtin
 	int (*func)(char **, int);
 } builtin_t;
 
-int _env(char **env, int args);
+int h_env(char **env);
 void h_exit(int);
 int _setenv(char **env, int args);
 int _unsetenv(char **env, int args);
