@@ -106,6 +106,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			free(tokens[i]);
 		free(tokens);
 	}
+	/* todo: check if we need to add a new line here */
 	free(line); /* free resources */
 	return (0);
 }
