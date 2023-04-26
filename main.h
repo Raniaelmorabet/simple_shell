@@ -8,6 +8,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 typedef struct s_cmd_elem
 {
@@ -52,7 +54,7 @@ int _env(char **env, int args);
 void h_exit(int);
 int _setenv(char **env, int args);
 int _unsetenv(char **env, int args);
-int _cd(char **env, int args);
+/*int _cd(char **env, int args);*/
 
 void *_realloc(void *ptr, size_t size);
 char **_strtok(char *str, char *delim);
