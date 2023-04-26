@@ -22,3 +22,10 @@
 * **ac is the number of items in av**
 #### av[0] usually contains the name used to invoke the current program. av[1] is the first argument of the program, av[2] the second, and so on.
 ### <ins>Exercises
+#### <ins>0.av
+**_Write a program that prints all the arguments, without using ac._**
+#### <ins>1.Read line
+**_Write a program that prints "$ ", wait for the user to enter a command, prints it on the next line. man 3 getline_**
+## important
+**_make sure you read the man, and the RETURN VALUE section, in order to know when to stop reading Keyword: “end-of-file”, or EOF (or Ctrl+D)._**
+* ***Write your own version of getline.***
