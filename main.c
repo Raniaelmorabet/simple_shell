@@ -80,8 +80,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 
 	while (1337)
 	{
-		/* read input */
-		line = readline("$ ");
+		line = readline("$ "); /* read input */
 		line_count++;
 		if (!line)
 			break;
@@ -93,8 +92,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		}
 		if (_strncmp(line, "exit", 4) == 0)
 			exit(EXIT_SUCCESS);
-		/* parse input into tokens */
-		tokens = strtow(line, ' ');
+		tokens = strtow(line, ' '); /* parse input into tokens */
 		if (!tokens)
 		{
 			free(line);
