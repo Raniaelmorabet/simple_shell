@@ -115,4 +115,7 @@ int is_buildin(char *cmd);
 void execute_buildin(char *line, char **tokens, char **env,
 					 char *bin, int line_nbr);
 
+char **get_paths(char **env);
+char *in_path(char *cmd, char **paths);
+
 #endif /* MAIN_H */

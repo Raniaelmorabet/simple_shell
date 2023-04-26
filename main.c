@@ -80,6 +80,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL;
+	char **path = get_paths(env);
 	int line_count = 0;
 
 	while (1337)
@@ -101,7 +102,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			execute_buildin(line, tokens, env, av[0], line_count);
 			continue;
 		}
-
+		tokens[0] = in_path(tokens[0], path); /* check if it's in PATH */
 		if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
 		else

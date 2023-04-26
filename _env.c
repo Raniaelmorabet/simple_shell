@@ -42,10 +42,13 @@ char *in_path(char *cmd, char **paths)
 		_strcat(tmp, "/");
 		_strcat(tmp, cmd);
 		if (access(tmp, F_OK) == 0)
+		{
+			free(cmd);
 			return (_strdup(tmp));
+		}
 		i++;
 	}
-	return (NULL);
+	return (cmd);
 }
 
 /**
