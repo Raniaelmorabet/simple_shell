@@ -1,2 +1,10 @@
-# mini_shell
-
+# <ins>simple shell</ins></span>
+![img.png](img.png)
+## <ins>*Resources*
+### <ins>*_Read or watch:_*
+* ### [unix shell](https://intranet.alxswe.com/rltoken/f0YU9TAhniMXWlSXtb64Yw)
+* ### [Thompson shell](https://intranet.alxswe.com/rltoken/7LJOp2qP7qHUcsOK2-F3qA)
+* ### [ken thompson](https://intranet.alxswe.com/rltoken/wTSu31ZP1f7fFTJFgRQC7w)
+* ### [Everything you need to know to start coding your own shell concept page](https://intranet.alxswe.com/concepts/64)
+## <ins>*_PID & PPID_*
+**A process is an instance of an executing program, that has a unique process ID. This process ID is used by many functions and system calls to interact with and manipulate processes. In order to retrieve the current process’ ID, you can use the system call getpid (man 2 getpid):**
