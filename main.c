@@ -80,7 +80,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL;
-	//char **path = get_paths(env);
+	char **path = get_paths(env); /*todo: fix memory leak here */
 	int line_count = 0;
 
 	while (1337)
@@ -97,7 +97,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			line = NULL;
 			continue;
 		}
-		// tokens[0] = in_path(tokens[0], path); /* check if it's in PATH */
+		 tokens[0] = in_path(tokens[0], path); /* check if it's in PATH */
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
 			free_resources(&line, &tokens);

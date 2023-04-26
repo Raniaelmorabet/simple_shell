@@ -20,7 +20,6 @@ int is_buildin(char *cmd)
 
 /**
  * execute_buildin - executes a buildin
- * @line: line read
  * @tokens: tokens to execute
  * @env: environment variables
  * @bin: name of program
