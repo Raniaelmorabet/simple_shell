@@ -75,7 +75,7 @@ char *readline(char *prompt)
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
-	char *line = NULL, *status = NULL;
+	char *line = NULL;
 	int line_count = 0;
 
 	while (1337)
@@ -100,12 +100,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			continue;
 		}
 		if (_strcmp(tokens[0], "exit") == 0)
-		{
-			status = _strdup(tokens[1]);
-			free_resources(&line, &tokens);
-			if (h_exit(av[0], status, line_count) != 0)
-				continue;
-		}
+			exit(0);
 		/* if not, check if it's a path to an executable */
 		if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
