@@ -37,4 +37,7 @@
 
 ### Warning
 **in this example, execve is used without the current environment (last argument), don’t forget to add it in your Shell!**
+![img_3.png](img_3.png)
+## Creating processes
+* **_The system call fork (man 2 fork) creates a new child process, almost identical to the parent (the process that calls fork). Once fork successfully returns, two processes continue to run the same program, but with different stacks, datas and heaps._**
 
