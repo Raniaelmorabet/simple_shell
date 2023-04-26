@@ -27,18 +27,13 @@ int is_buildin(char *cmd)
  * @line_nbr: line number
  * Return: None
  */
-void execute_buildin(char *line, char **tokens, char **env,
-					 char *bin, int line_nbr)
+void execute_buildin(char **tokens, char **env, char *bin, int line_nbr)
 {
-	char *status = NULL;
+	(void)bin;
+	(void)line_nbr;
 
 	if (_strcmp(tokens[0], "exit") == 0)
-	{
-		status = _strdup(tokens[1]);
-		if (h_exit(bin, status, line_nbr) != 0)
-			return;
-	}
+		exit(0);
 	else if (_strcmp(tokens[0], "env") == 0)
 		h_env(env);
-	free_resources(&line, &tokens);
 }

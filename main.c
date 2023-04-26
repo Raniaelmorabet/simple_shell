@@ -80,7 +80,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL;
-	char **path = get_paths(env);
+	//char **path = get_paths(env);
 	int line_count = 0;
 
 	while (1337)
@@ -97,13 +97,15 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			line = NULL;
 			continue;
 		}
-		if (is_buildin(tokens[0])) /* check if it's a buildin */
+		// tokens[0] = in_path(tokens[0], path); /* check if it's in PATH */
+		if (_strcmp(tokens[0], "exit") == 0)
 		{
-			execute_buildin(line, tokens, env, av[0], line_count);
-			continue;
+			free_resources(&line, &tokens);
+			exit(0);
 		}
-		tokens[0] = in_path(tokens[0], path); /* check if it's in PATH */
-		if (access(tokens[0], F_OK) != -1)
+		else if (_strcmp(tokens[0], "env") == 0)
+			h_env(env);
+		else if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
 		else
 			cmd_error(av[0], tokens[0], "not found", line_count);

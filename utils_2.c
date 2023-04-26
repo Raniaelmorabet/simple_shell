@@ -64,6 +64,7 @@ void free_resources(char **line, char ***tokens)
 	for (i = 0; (*tokens)[i]; i++)
 		free((*tokens)[i]);
 	free(*tokens);
+
 	free(*line);
 	*line = NULL;
 	*tokens = NULL;

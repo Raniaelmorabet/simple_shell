@@ -112,7 +112,7 @@ void free_resources(char **line, char ***tokens);
 void cmd_error(char *bin, char *cmd, char *msg, int line);
 
 int is_buildin(char *cmd);
-void execute_buildin(char *line, char **tokens, char **env,
+void execute_buildin(char **tokens, char **env,
 					 char *bin, int line_nbr);
 
 char **get_paths(char **env);
