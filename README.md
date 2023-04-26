@@ -1,4 +1,2 @@
 # mini_shell
 
-## pseudocode
-* 
