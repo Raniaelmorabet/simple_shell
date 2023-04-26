@@ -36,10 +36,7 @@ void execute_buildin(char *line, char **tokens, char **env,
 	{
 		status = _strdup(tokens[1]);
 		if (h_exit(bin, status, line_nbr) != 0)
-		{
-			free_resources(&line, &tokens);
 			return;
-		}
 	}
 	else if (_strcmp(tokens[0], "env") == 0)
 		h_env(env);
