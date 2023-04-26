@@ -11,8 +11,12 @@ static int _len(char *s)
 {
 	int i = 0;
 
-	while (s[i] != '\0' && s[i] != '#')
+	while (s[i] != '\0')
+	{
 		i++;
+		if (s[i] == ' ' && s[i + 1] == '#')
+			break;
+	}
 	return (i);
 }
 
