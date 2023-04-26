@@ -101,6 +101,9 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
 			free_resources(&line, &tokens);
+			for (ac = 0; path[ac]; ac++)
+				free(path[ac]);
+			free(path);
 			exit(0);
 		}
 		else if (_strcmp(tokens[0], "env") == 0)
