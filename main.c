@@ -46,6 +46,8 @@ char *readline(char *prompt)
 	size_t len = 0;
 	ssize_t read;
 
+	prompt = isatty(STDIN_FILENO) ? prompt : "";
+
 	/* display prompt */
 	write(STDOUT_FILENO, prompt, _strlen(prompt));
 
@@ -76,12 +78,13 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL;
-	int i;
+	int i, line_count = 0;
 
 	while (1337)
 	{
 		/* read input */
 		line = readline("$ ");
+		line_count++;
 		if (!line)
 			break;
 		if (line[0] == '\n')
@@ -99,7 +102,8 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		{
 			/* if not, print error */
 			error(av[0], ": ", 127);
-			error(tokens[0], ": command not found\n", 127);
+			error(_itoa(line_count, "0123456789"), ": ", 127);
+			error(tokens[0], ": not found\n", 127);
 		}
 
 		/* free all resources */
@@ -108,7 +112,8 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		free(tokens);
 	}
 
-	write(STDOUT_FILENO, "exit\n", 5); /* ctrl + d was pressed */
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "exit\n", 5); /* ctrl + d was pressed */
 	free(line); /* free resources */
 	return (0);
 }

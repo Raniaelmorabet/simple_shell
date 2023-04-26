@@ -87,11 +87,22 @@ int _unsetenv(char **env, int args);
 /*int _cd(char **env, int args);*/
 
 void *_realloc(void *ptr, size_t size);
-char **_strtok(char *str, char *delim);
 char **strtow(char *str, char delim);
-int _strlen(char *s);
-char *_strdup(char *str);
 
 int error(char *msg, char *arg, int status);
+
+/* string manipulation */
+char *_strcat(char *dest, char *src);
+char *_strchr(char *s, char c);
+int _strcmp(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
+int _strncmp(char *s1, char *s2, int n);
+char *_strncpy(char *dest, char *src, int n);
+char *_strdup(char *str);
+int _strlen(char *s);
+
+
+int	_atoi(const char *str);
+char *_itoa(ssize_t value, char *base);
 
 #endif /* MAIN_H */
