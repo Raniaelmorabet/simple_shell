@@ -100,6 +100,7 @@ int _strncmp(char *s1, char *s2, int n);
 char *_strncpy(char *dest, char *src, int n);
 char *_strdup(char *str);
 int _strlen(char *s);
+void _memset(char *s, char b, unsigned int n);
 
 
 int	_atoi(const char *str);
@@ -109,5 +110,14 @@ ssize_t _abs(ssize_t n);
 void free_resources(char **line, char ***tokens);
 
 void cmd_error(char *bin, char *cmd, char *msg, int line);
+
+int is_buildin(char *cmd);
+void execute_buildin(char **tokens, char **env,
+					 char *bin, int line_nbr);
+
+char **get_paths(char **env);
+char *in_path(char *cmd, char **paths);
+void free_path(char **path);
+void free_line(char **line);
 
 #endif /* MAIN_H */

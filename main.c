@@ -1,49 +1,6 @@
 #include "main.h"
 
 /**
- * is_buildin - checks if a command is a buildin
- * @cmd: command to check
- * Return: 1 if buildin, 0 otherwise
- */
-int is_buildin(char *cmd)
-{
-	int i;
-	char *buildins[] = {"exit", "env", NULL};
-
-	for (i = 0; buildins[i]; i++)
-	{
-		if (_strcmp(cmd, buildins[i]) == 0)
-			return (1);
-	}
-	return (0);
-}
-
-/**
- * execute_buildin - executes a buildin
- * @line: line read
- * @tokens: tokens to execute
- * @env: environment variables
- * @bin: name of program
- * @line_nbr: line number
- * Return: None
- */
-void execute_buildin(char *line, char **tokens, char **env,
-					 char *bin, int line_nbr)
-{
-	char *status = NULL;
-
-	if (_strcmp(tokens[0], "exit") == 0)
-	{
-		status = _strdup(tokens[1]);
-		if (h_exit(bin, status, line_nbr) != 0)
-			return;
-	}
-	else if (_strcmp(tokens[0], "env") == 0)
-		h_env(env);
-	free_resources(&line, &tokens);
-}
-
-/**
  * execute - executes a command
  * @tokens: tokens to execute
  * @env: environment variables
@@ -92,10 +49,7 @@ char *readline(char *prompt)
 	/* read input using getline */
 	read = getline(&line, &len, stdin);
 	if (read == -1)
-	{
-		free(line);
 		return (NULL);
-	}
 
 	/* check if input is empty */
 	if (line[0] == '\n')
@@ -118,39 +72,41 @@ char *readline(char *prompt)
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
+	char **path = get_paths(env); /*todo: fix memory leak here */
 	char *line = NULL;
 	int line_count = 0;
 
 	while (1337)
 	{
-		line = readline("$ "); /* read input */
 		line_count++;
+		line = readline("$ "); /* read input */
 		if (!line)
 			break;
 		if (line[0] == '\n')
 		{
-			free(line);
-			line = NULL;
+			free_line(&line);
 			continue;
 		}
 		tokens = strtow(line, ' '); /* parse input into tokens */
 		if (!tokens)
 		{
-			free(line);
-			line = NULL;
+			free_line(&line);
 			continue;
 		}
-		if (is_buildin(tokens[0])) /* check if it's a buildin */
+		if (_strcmp(tokens[0], "exit") == 0)
 		{
-			execute_buildin(line, tokens, env, av[0], line_count);
-			continue;
+			free_resources(&line, &tokens);
+			free_path(path);
+			exit(0);
 		}
-		/* if not, check if it's a path to an executable */
-		if (access(tokens[0], F_OK) != -1)
+		else if (_strcmp(tokens[0], "env") == 0)
+			h_env(env);
+		else if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
 		else
 			cmd_error(av[0], tokens[0], "not found", line_count);
 		free_resources(&line, &tokens);
 	}
+	free_path(path);
 	return (0);
 }
