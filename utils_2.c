@@ -1,3 +1,4 @@
+#include <unistd.h>
 
 /**
  * _strchr - locates a character in a string
@@ -38,3 +39,13 @@ char *_memset(char *s, char b, unsigned int n)
 
 	return (s);
 }
+
+/**
+ * _abs - computes the absolute value of an integer
+ * @n: integer to compute
+*/
+ssize_t _abs(ssize_t n)
+{
+	return (n < 0 ? -n : n);
+}
+
