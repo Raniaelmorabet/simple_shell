@@ -35,8 +35,7 @@ void execute(char **tokens, char **env, char *bin)
  * @prompt: prompt to display
  * Return: line read
  */
-char *readline(char *prompt)
-{
+char *readline(char *prompt) {
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t read;
@@ -49,18 +48,11 @@ char *readline(char *prompt)
 	/* read input using getline */
 	read = getline(&line, &len, stdin);
 	if (read == -1)
-	{
-		free(line);
-		exit(EXIT_SUCCESS);
-	}
+		return (NULL);
 
 	/* check if input is empty */
 	if (line[0] == '\n')
-	{
-		free(line);
-		line = NULL;
-		return (NULL);
-	}
+		return (line);
 
 	/* remove new line from input */
 	line[_strlen(line) - 1] = '\0';
@@ -85,10 +77,16 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 
 	while (1337)
 	{
-		line = readline("$ "); /* read input */
 		line_count++;
+		line = readline("$ "); /* read input */
 		if (!line)
+			break;
+		if (line[0] == '\0')
+		{
+			free(line);
+			line = NULL;
 			continue;
+		}
 
 		tokens = strtow(line, ' '); /* parse input into tokens */
 		if (!tokens)
@@ -101,7 +99,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
 			free_resources(&line, &tokens);
-			free_path(&path);
+			free_path(path);
 			exit(0);
 		}
 		else if (_strcmp(tokens[0], "env") == 0)
@@ -112,6 +110,6 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			cmd_error(av[0], tokens[0], "not found", line_count);
 		free_resources(&line, &tokens);
 	}
-	free_path(&path);
+	free_path(path);
 	return (0);
 }

@@ -78,12 +78,12 @@ char **get_paths(char **env)
  * free_path - free path env
  * @path: pointer to path
  */
-void free_path(char ***path)
+void free_path(char **path)
 {
 	int i; 
 
-	for (i = 0; *(path)[i]; i++)
-		free(*(path)[i]);
-	free(*path);
+	for (i = 0; path[i]; i++)
+		free(path[i]);
+	free(path);
 }
 
