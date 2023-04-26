@@ -29,3 +29,12 @@
 ## important
 **_make sure you read the man, and the RETURN VALUE section, in order to know when to stop reading Keyword: “end-of-file”, or EOF (or Ctrl+D)._**
 * ***Write your own version of getline.***
+![img_2.png](img_2.png)
+#### <ins>2.command line to av
+**_Write a function that splits a string and returns an array of each word of the string._**
+## Executing a program
+* **_The system call execve allows a process to execute another program (man 2 execve). Note that this system call does load the new program into the current process’ memory in place of the “previous” program: on success execve does not return to continue the rest of the “previous” program._**
+
+### Warning
+**in this example, execve is used without the current environment (last argument), don’t forget to add it in your Shell!**
+
