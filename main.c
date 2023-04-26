@@ -106,8 +106,6 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			free(tokens[i]);
 		free(tokens);
 	}
-	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "\n", 1);
 	free(line); /* free resources */
 	return (0);
 }
