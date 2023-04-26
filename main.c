@@ -72,7 +72,7 @@ char *readline(char *prompt)
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
-	char *line = NULL;
+	char *line = NULL, *line_number = NULL;
 	int i, line_count = 0;
 
 	while (1337)
@@ -96,9 +96,11 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		else
 		{
 			/* if not, print error */
+			line_number = _itoa(line_count, "0123456789");
 			error(av[0], ": ", 127);
-			error(_itoa(line_count, "0123456789"), ": ", 127);
+			error(line_number, ": ", 127);
 			error(tokens[0], ": not found\n", 127);
+			free(line_number);
 		}
 
 		/* free all resources */
