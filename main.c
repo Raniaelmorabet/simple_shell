@@ -75,7 +75,7 @@ char *readline(char *prompt)
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
-	char *line = NULL, *status = NULL;
+	char *line = NULL;
 	int line_count = 0;
 
 	while (1337)
@@ -91,6 +91,11 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			line = NULL;
 			continue;
 		}
+		if (_strncmp(line, "exit", 4) == 0)
+		{
+			free(line);
+			exit(EXIT_SUCCESS);
+		}
 		/* parse input into tokens */
 		tokens = strtow(line, ' ');
 		if (!tokens)
@@ -98,13 +103,6 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			free(line);
 			line = NULL;
 			continue;
-		}
-		if (_strcmp(tokens[0], "exit") == 0)
-		{
-			status = _strdup(tokens[1]);
-			free_resources(&line, &tokens);
-			if (h_exit(av[0], status, line_count) != 0)
-				continue;
 		}
 		/* if not, check if it's a path to an executable */
 		if (access(tokens[0], F_OK) != -1)
