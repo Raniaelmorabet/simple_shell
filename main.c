@@ -76,6 +76,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL;
+	int i;
 
 	while (1337)
 	{
@@ -102,7 +103,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		}
 
 		/* free all resources */
-		for (int i = 0; tokens[i]; i++)
+		for (i = 0; tokens[i]; i++)
 			free(tokens[i]);
 		free(tokens);
 	}

@@ -115,6 +115,7 @@ char **strtow(char *str, char delim)
 		else
 			start = i + 1;
 	}
+	words[index] = NULL;
 
 	return (words);
 }
