@@ -49,7 +49,10 @@ char *readline(char *prompt)
 	/* read input using getline */
 	read = getline(&line, &len, stdin);
 	if (read == -1)
+	{
+		free(line);
 		return (NULL);
+	}
 
 	/* check if input is empty */
 	if (line[0] == '\n')
@@ -72,41 +75,43 @@ char *readline(char *prompt)
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
-	char **path = get_paths(env); /*todo: fix memory leak here */
-	char *line = NULL;
+	char *line = NULL, *line_number = NULL;
 	int line_count = 0;
 
 	while (1337)
 	{
+		/* read input */
+		line = readline("$ ");
 		line_count++;
-		line = readline("$ "); /* read input */
 		if (!line)
 			break;
 		if (line[0] == '\n')
 		{
-			free_line(&line);
+			free(line);
+			line = NULL;
 			continue;
 		}
-		tokens = strtow(line, ' '); /* parse input into tokens */
+		/* parse input into tokens */
+		tokens = strtow(line, ' ');
 		if (!tokens)
 		{
-			free_line(&line);
+			free(line);
+			line = NULL;
 			continue;
 		}
-		if (_strcmp(tokens[0], "exit") == 0)
-		{
-			free_resources(&line, &tokens);
-			free_path(path);
-			exit(0);
-		}
-		else if (_strcmp(tokens[0], "env") == 0)
-			h_env(env);
-		else if (access(tokens[0], F_OK) != -1)
+		/* if not, check if it's a path to an executable */
+		if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
 		else
-			cmd_error(av[0], tokens[0], "not found", line_count);
+		{
+			/* if not, print error */
+			line_number = _itoa(line_count, "0123456789");
+			error(av[0], ": ", 127);
+			error(line_number, ": ", 127);
+			error(tokens[0], ": not found\n", 127);
+			free(line_number);
+		}
 		free_resources(&line, &tokens);
 	}
-	free_path(path);
 	return (0);
 }
