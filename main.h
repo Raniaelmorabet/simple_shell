@@ -118,5 +118,6 @@ void execute_buildin(char **tokens, char **env,
 char **get_paths(char **env);
 char *in_path(char *cmd, char **paths);
 void free_path(char **path);
+void free_line(char **line);
 
 #endif /* MAIN_H */

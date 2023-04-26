@@ -35,7 +35,8 @@ void execute(char **tokens, char **env, char *bin)
  * @prompt: prompt to display
  * Return: line read
  */
-char *readline(char *prompt) {
+char *readline(char *prompt)
+{
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t read;
@@ -71,8 +72,8 @@ char *readline(char *prompt) {
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
-	char *line = NULL;
 	char **path = get_paths(env); /*todo: fix memory leak here */
+	char *line = NULL;
 	int line_count = 0;
 
 	while (1337)
@@ -81,18 +82,15 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		line = readline("$ "); /* read input */
 		if (!line)
 			break;
-		if (line[0] == '\0')
+		if (line[0] == '\n')
 		{
-			free(line);
-			line = NULL;
+			free_line(&line);
 			continue;
 		}
-
 		tokens = strtow(line, ' '); /* parse input into tokens */
 		if (!tokens)
 		{
-			free(line);
-			line = NULL;
+			free_line(&line);
 			continue;
 		}
 		 tokens[0] = in_path(tokens[0], path); /* check if it's in PATH */

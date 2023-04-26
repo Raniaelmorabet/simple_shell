@@ -80,7 +80,7 @@ char **get_paths(char **env)
  */
 void free_path(char **path)
 {
-	int i; 
+	int i;
 
 	for (i = 0; path[i]; i++)
 		free(path[i]);

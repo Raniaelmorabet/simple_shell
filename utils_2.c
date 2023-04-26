@@ -69,3 +69,13 @@ void free_resources(char **line, char ***tokens)
 	*line = NULL;
 	*tokens = NULL;
 }
+
+/**
+ * free_line - free the line
+ * @line: line to be freed
+ */
+void free_line(char **line)
+{
+	free(*line);
+	*line = NULL;
+}
