@@ -90,8 +90,6 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			line = NULL;
 			continue;
 		}
-		if (_strncmp(line, "exit", 4) == 0)
-			exit(EXIT_SUCCESS);
 		tokens = strtow(line, ' '); /* parse input into tokens */
 		if (!tokens)
 		{
