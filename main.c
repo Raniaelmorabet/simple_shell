@@ -99,18 +99,18 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			line = NULL;
 			continue;
 		}
+		if (_strcmp(tokens[0], "exit") == 0)
+		{
+			free_resources(&line, &tokens);
+			exit(0);
+		}
+		else if (_strcmp(tokens[0], "env") == 0)
+			h_env(env);
 		/* if not, check if it's a path to an executable */
 		if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
 		else
-		{
-			/* if not, print error */
-			line_number = _itoa(line_count, "0123456789");
-			error(av[0], ": ", 127);
-			error(line_number, ": ", 127);
-			error(tokens[0], ": not found\n", 127);
-			free(line_number);
-		}
+			cmd_error(av[0], tokens[0], "not found", line_count);
 		free_resources(&line, &tokens);
 	}
 	return (0);
