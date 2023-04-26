@@ -72,6 +72,7 @@ char *readline(char *prompt)
 int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
+	char **path = get_paths(env); /*todo: fix memory leak here */
 	char *line = NULL;
 	int line_count = 0;
 
@@ -95,6 +96,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
 			free_resources(&line, &tokens);
+			free_path(path);
 			exit(0);
 		}
 		else if (_strcmp(tokens[0], "env") == 0)
@@ -105,5 +107,6 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			cmd_error(av[0], tokens[0], "not found", line_count);
 		free_resources(&line, &tokens);
 	}
+	free_path(path);
 	return (0);
 }
