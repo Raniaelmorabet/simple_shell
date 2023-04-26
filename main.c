@@ -101,7 +101,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			execute_buildin(line, tokens, env, av[0], line_count);
 			continue;
 		}
-		/* if not, check if it's a path to an executable */
+		
 		if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
 		else
