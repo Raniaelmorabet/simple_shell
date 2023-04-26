@@ -100,7 +100,10 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			continue;
 		}
 		if (_strcmp(tokens[0], "exit") == 0)
-			exit(0);
+		{
+			free_resources(&line, &tokens);
+			return (0);
+		}
 		/* if not, check if it's a path to an executable */
 		if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
