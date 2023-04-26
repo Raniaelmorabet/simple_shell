@@ -49,4 +49,3 @@ ssize_t _abs(ssize_t n)
 {
 	return (n < 0 ? -n : n);
 }
-
