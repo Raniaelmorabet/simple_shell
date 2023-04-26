@@ -58,7 +58,6 @@ int count_words(char *str, char delim)
 
 	for (i = 0; i < str_len; i++)
 	{
-//		if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
 		if (str[i] != delim && (str[i + 1] == delim || str[i + 1] == '\0'))
 			word_count++;
 	}
@@ -104,7 +103,6 @@ char **strtow(char *str, char delim)
 	str_len = _len(str);
 	for (i = 0; i < str_len; i++)
 	{
-//		if (str[i] != ' ' && (str[i + 1] == ' ' || !str[i + 1]))
 		if (str[i] != delim && (str[i + 1] == delim || !str[i + 1]))
 		{
 			end = i + 1;
@@ -112,7 +110,6 @@ char **strtow(char *str, char delim)
 			if (!words[index])
 				return (free_words(words, index), NULL);
 			index++;
-//		} else if (str[i] != ' ' && str[i + 1] != ' ')
 		} else if (str[i] != delim && str[i + 1] != delim)
 			continue;
 		else
