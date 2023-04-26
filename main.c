@@ -102,8 +102,8 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
 			status = _strdup(tokens[1]);
- 			free_resources(&line, &tokens);
- 			if (h_exit(av[0], status, line_count) != 0)
+			free_resources(&line, &tokens);
+			if (h_exit(av[0], status, line_count) != 0)
 				continue;
 		}
 		/* if not, check if it's a path to an executable */
