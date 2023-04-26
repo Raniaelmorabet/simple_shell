@@ -76,7 +76,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 {
 	char **tokens = NULL;
 	char *line = NULL, *line_number = NULL;
-	int i, line_count = 0;
+	int line_count = 0;
 
 	while (1337)
 	{
