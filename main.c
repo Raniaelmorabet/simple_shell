@@ -106,8 +106,7 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 		}
 		else if (_strcmp(tokens[0], "env") == 0)
 			h_env(env);
-		/* if not, check if it's a path to an executable */
-		if (access(tokens[0], F_OK) != -1)
+		else if (access(tokens[0], F_OK) != -1)
 			execute(tokens, env, av[0]); /* if it is, execute it */
 		else
 			cmd_error(av[0], tokens[0], "not found", line_count);
