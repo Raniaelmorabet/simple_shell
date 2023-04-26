@@ -8,3 +8,9 @@
 * ### [Everything you need to know to start coding your own shell concept page](https://intranet.alxswe.com/concepts/64)
 ## <ins>*_PID & PPID_*
 **A process is an instance of an executing program, that has a unique process ID. This process ID is used by many functions and system calls to interact with and manipulate processes. In order to retrieve the current process’ ID, you can use the system call getpid (man 2 getpid):**
+![img_1.png](img_1.png)
+* ###  **Note in the example above, that every time you run the program, a new process is created, and its ID is different.**
+##### *Each process has a parent: the process that created it. It is possible to get the PID of a parent process by using the getppid system call (man 2 getppid), from within the child process*
+### <ins>Exercises
+#### <ins>0.getppid
+
