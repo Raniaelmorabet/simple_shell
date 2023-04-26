@@ -43,6 +43,7 @@ char *_memset(char *s, char b, unsigned int n)
 /**
  * _abs - computes the absolute value of an integer
  * @n: integer to compute
+ * Return: absolute value of n
 */
 ssize_t _abs(ssize_t n)
 {
