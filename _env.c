@@ -23,3 +23,50 @@ int h_env(char **env)
 
 	return (EXIT_SUCCESS);
 }
+
+/**
+ * in_path - checks if a command is in the PATH
+ * @cmd: command to check
+ * @paths: paths to check
+ * Return: 1 if in PATH, 0 if not
+ */
+char *in_path(char *cmd, char **paths)
+{
+	int i = 0;
+	char tmp[1024];
+
+	while (paths[i])
+	{
+		_memset(tmp, 0, 1024);
+		_strcpy(tmp, paths[i]);
+		_strcat(tmp, "/");
+		_strcat(tmp, cmd);
+		if (access(tmp, F_OK) == 0)
+			return (_strdup(tmp));
+		i++;
+	}
+	return (NULL);
+}
+
+/**
+ * get_paths - gets the paths from the environment
+ * @env: environment variables
+ * Return: paths
+ */
+char **get_paths(char **env)
+{
+	int i = 0;
+	char **paths = NULL;
+
+	while (env[i])
+	{
+		if (_strncmp(env[i], "PATH=", 5) == 0)
+		{
+			paths = strtow(env[i] + 5, ':');
+			break;
+		}
+		i++;
+	}
+
+	return (paths);
+}
