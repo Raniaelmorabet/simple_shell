@@ -18,20 +18,15 @@ void execute(char **tokens, char **env, char *bin)
 	{
 		/* child process */
 		if (execve(tokens[0], tokens, env) == -1)
-			perror(bin); /* todo: change this to av[0] */
+			perror(bin);
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
-	{
-		/* error forking */
 		perror(bin);
-	}
 	else
 	{
 		/* parent process */
-		do {
-			waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		wait(&status);
 	}
 }
 
@@ -111,9 +106,8 @@ int main(__attribute__((unused))int ac, char **av, char **env)
 			free(tokens[i]);
 		free(tokens);
 	}
-
 	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "exit\n", 5); /* ctrl + d was pressed */
+		write(STDOUT_FILENO, "\n", 1);
 	free(line); /* free resources */
 	return (0);
 }
